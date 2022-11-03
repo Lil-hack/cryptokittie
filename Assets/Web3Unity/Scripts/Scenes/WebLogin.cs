@@ -33,6 +33,8 @@ public class WebLogin : MonoBehaviour
         };
         // save account for next scene
         PlayerPrefs.SetString("Account", account);
+        Debug.Log("Lox");
+        Debug.Log(account);
         // reset login message
         SetConnectAccount("");
         // load next scene
