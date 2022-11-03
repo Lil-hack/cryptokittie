@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Web3Unity/Scenes/WebLogin.unity
-    guid: a1b2001e782bb47659732d7e2bcdc35f
+    path: Assets/Scenes/SampleScene2.unity
+    guid: 14ed65656f65c1842b07dc2711b9835d
   m_configObjects: {}
