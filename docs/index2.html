@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Imaginarium Twitch</title>
+    <link rel="shortcut icon" href="TemplateData/img/favicon.ico">
+    <link rel="stylesheet" href="TemplateData/css/style.css">
+  <script src="Build/test.loader.js"></script>
+
+	<script>
+		function ToggleFullScreen() {
+			var isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
+			(document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
+			(document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
+			(document.msFullscreenElement && document.msFullscreenElement !== null);
+			
+			var element = document.body.getElementsByClassName("webgl-content")[0];
+<!--			document.cookie = "name=0";-->
+			if (!isInFullScreen) {
+				document.getElementById("fullScreenButton").style.backgroundImage="url('TemplateData/img/fullScreen_off.png')";
+				return (element.requestFullscreen ||
+				element.webkitRequestFullscreen ||
+				element.mozRequestFullScreen ||
+				element.msRequestFullscreen).call(element);
+			}
+			else {
+				document.getElementById("fullScreenButton").style.backgroundImage="url('TemplateData/img/fullScreen_on.png')";
+				if (document.exitFullscreen) {
+					document.exitFullscreen();
+				} else if (document.webkitExitFullscreen) {
+					document.webkitExitFullscreen();
+				} else if (document.mozCancelFullScreen) {
+					document.mozCancelFullScreen();
+				} else if (document.msExitFullscreen) {
+					document.msExitFullscreen();
+				}
+			}
+		}
+		
+
+		
+		function RuntimeInitialized(){
+		}
+		
+		function UnityProgress(gameInstance, progress) {
+
+			document.getElementById("loadingBlock").style.display = "inherit";	 	
+			document.getElementById("fullBar").style.width = (100 * progress) + "%";
+			document.getElementById("emptyBar").style.width = (100 * (1 - progress)) + "%";
+
+		}
+		
+		function sayHi() {
+		  document.getElementById("loadingBlock").style.display = "none";
+		}
+
+		setTimeout(sayHi, 8000);
+    </script>
+  </head>
+  <body>
+  
+    <div class="keepRatio">
+
+
+		<div class="webgl-content">
+			<button id="fullScreenButton" onclick="ToggleFullScreen()"></button>
+			 <canvas id="unity-canvas" </canvas>
+   <script>
+      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+        // Mobile device style: fill the whole browser client area with the game canvas:
+        var meta = document.createElement('meta');
+        meta.name = 'viewport';
+        meta.content = 'width=device-width, height=device-height, initial-scale=1.0, user-scalable=no, shrink-to-fit=yes';
+        document.getElementsByTagName('head')[0].appendChild(meta);
+      }
+
+      createUnityInstance(document.querySelector("#unity-canvas"), {
+        dataUrl: "Build/test.data",
+        frameworkUrl: "Build/test.framework.js",
+        codeUrl: "Build/test.wasm",
+        streamingAssetsUrl: "StreamingAssets",
+        companyName: "DefaultCompany",
+        productName: "Twitch Game",
+        productVersion: "0.1",
+        //matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
+        // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
+      });
+
+    </script>
+		</div>
+
+
+		<div id="loadingBlock">
+
+
+
+			<div id="progressBar">
+
+				<div class="centered" style="margin-top: 55%;">
+					<img class="logo" src="TemplateData/img/preload.gif"></img>
+				</div>
+			</div>
+
+
+
+
+		</div>
+
+		
+
+	</div>
+
+  </body>
+</html>

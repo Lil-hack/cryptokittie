@@ -52,7 +52,7 @@ public class IPFS
             new MultipartFormFileSection("file", content, filename, contentType)
         };
         
-        using var requestUpload = UnityWebRequest.Post(host + "/api/v1/bucket/" + bucketId + "/upload", formUpload);
+        var requestUpload = UnityWebRequest.Post(host + "/api/v1/bucket/" + bucketId + "/upload", formUpload);
         requestUpload.SetRequestHeader("Authorization", "Bearer " + _apiKey);
         await requestUpload.SendWebRequest();
         
@@ -64,7 +64,7 @@ public class IPFS
         // var jsonFile ="{\"path\": \""+path+"/"+filename+"\", \"source\": \""+bucketId+"\"}";
         var jsonFile ="{\"path\": \""+filename+"\", \"source\": \""+bucketId+"\"}";
 
-        using var requestFile = new UnityWebRequest(host + "/api/v1/bucket/" + bucketId + "/file", "POST");
+        var requestFile = new UnityWebRequest(host + "/api/v1/bucket/" + bucketId + "/file", "POST");
         requestFile.SetRequestHeader("Authorization", "Bearer " + _apiKey);
         requestFile.SetRequestHeader("Content-Type", "application/json");
         requestFile.uploadHandler = new UploadHandlerRaw(new System.Text.UTF8Encoding().GetBytes(jsonFile));
